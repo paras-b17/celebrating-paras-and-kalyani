@@ -3,7 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>Paras weds Kalyani | Royal Wedding Reel</title>
+  <title>Paras &amp; Kalyani — Wedding Invitation</title>
+
+  <!-- Social & WhatsApp Link Preview Metadata -->
+  <meta name="description" content="With the blessings of Lord Krishna, we cordially invite you to the wedding celebrations of Paras &amp; Kalyani (26th – 28th December 2026)." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Paras &amp; Kalyani — Wedding Invitation" />
+  <meta property="og:description" content="With the blessings of Lord Krishna, join us as we celebrate the sacred union of Paras &amp; Kalyani • 26th – 28th December 2026." />
+  <meta property="og:url" content="https://paras-b17.github.io/celebrating-paras-and-kalyani/" />
+  <meta property="og:image" content="https://paras-b17.github.io/celebrating-paras-and-kalyani/krishna-opening.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Paras &amp; Kalyani — Wedding Invitation" />
+  <meta name="twitter:description" content="With the blessings of Lord Krishna, join us for the wedding celebrations of Paras &amp; Kalyani." />
+  <meta name="twitter:image" content="https://paras-b17.github.io/celebrating-paras-and-kalyani/krishna-opening.png" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@600;700&display=swap" rel="stylesheet">
@@ -175,7 +188,7 @@
     }
 
     /* =========================================================
-       ROYAL VELVET & MANDALA LOTUS MEDALLION COVER OVERLAY
+       OPENING COVER OVERLAY (NAMES ABOVE, TAP MONOGRAM BELOW)
        ========================================================= */
     .start-overlay {
       position: absolute;
@@ -245,117 +258,76 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin-top: -4px;
+    }
+
+    .cover-couple-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3rem;
+      color: #fff3d1;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+      margin-bottom: 20px;
+    }
+
+    /* Clickable Monogram Crest Button */
+    .monogram-entry-btn {
+      position: relative;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.3s ease;
+    }
+
+    .monogram-entry-btn:hover {
+      transform: scale(1.04);
+    }
+
+    .monogram-entry-btn:active {
+      transform: scale(0.98);
     }
 
     /* Luminous Parchment Halo Behind Cover Monogram */
     .cover-crest-stage {
       position: relative;
-      width: 260px;
-      height: 118px;
+      width: 274px;
+      height: 128px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
 
     .cover-crest-stage::before {
       content: "";
       position: absolute;
-      inset: 8px 14px;
+      inset: 6px 12px;
       border-radius: 50%;
-      background: radial-gradient(ellipse at center, #fdf7eb 50%, rgba(242, 224, 191, 0.88) 76%, transparent 100%);
-      box-shadow: 0 0 32px rgba(212, 175, 55, 0.28);
+      background: radial-gradient(ellipse at center, #fdf7eb 52%, rgba(242, 224, 191, 0.88) 76%, transparent 100%);
+      animation: crestGlow 2.8s ease-in-out infinite;
     }
 
-    .cover-couple-names {
-      font-family: 'Great Vibes', cursive;
-      font-size: 2.75rem;
-      color: #fff3d1;
-      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
-      margin-bottom: 18px;
+    @keyframes crestGlow {
+      0%, 100% { box-shadow: 0 0 26px rgba(212, 175, 55, 0.32), 0 0 0 0 rgba(255, 230, 153, 0.25); }
+      50% { box-shadow: 0 0 44px rgba(255, 224, 130, 0.62), 0 0 0 10px rgba(255, 230, 153, 0); }
     }
 
-    /* Unique Ornate Mandala Lotus Medallion Trigger */
-    .mandala-seal-btn {
-      position: relative;
-      width: 146px;
-      height: 146px;
-      border: none;
-      background: transparent;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: transform 0.25s ease;
-    }
-
-    .mandala-seal-btn:hover {
-      transform: scale(1.05);
-    }
-
-    .mandala-outer-svg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.85));
-      animation: mandalaSpin 28s linear infinite;
-    }
-
-    @keyframes mandalaSpin {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    .mandala-core {
-      position: relative;
-      z-index: 2;
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 28%, #fff1b8 0%, #d4a334 55%, #7c5209 100%);
-      border: 1.5px solid #fff3c4;
-      box-shadow:
-        0 0 0 4px rgba(41, 5, 14, 0.72),
-        0 0 0 5.5px rgba(212, 175, 55, 0.65),
-        inset 0 2px 8px rgba(255, 255, 255, 0.75);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: #29050e;
-      animation: corePulse 2.6s ease-in-out infinite;
-    }
-
-    @keyframes corePulse {
-      0%, 100% { box-shadow: 0 0 0 4px rgba(41, 5, 14, 0.72), 0 0 0 5.5px rgba(212, 175, 55, 0.65), 0 0 20px rgba(212, 175, 55, 0.25); }
-      50% { box-shadow: 0 0 0 4px rgba(41, 5, 14, 0.72), 0 0 0 6.5px rgba(255, 230, 153, 0.9), 0 0 34px rgba(212, 175, 55, 0.5); }
-    }
-
-    .lotus-icon {
-      width: 30px;
-      height: 22px;
-      margin-bottom: 3px;
-    }
-
-    .mandala-label-top {
+    .tap-crest-hint {
       font-family: 'Cinzel', serif;
-      font-size: 0.56rem;
-      font-weight: 700;
-      letter-spacing: 0.16em;
+      font-size: 0.6rem;
+      font-weight: 600;
+      letter-spacing: 0.24em;
       text-transform: uppercase;
-      line-height: 1.15;
+      color: var(--gold-bright);
+      opacity: 0.88;
+      animation: hintFade 2.8s ease-in-out infinite;
     }
 
-    .mandala-label-sub {
-      font-family: 'Cinzel', serif;
-      font-size: 0.48rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      opacity: 0.85;
-      margin-top: 1px;
+    @keyframes hintFade {
+      0%, 100% { opacity: 0.65; }
+      50% { opacity: 1; }
     }
 
     .cover-poetic-footer {
@@ -390,7 +362,7 @@
     }
 
     /* =========================================================
-       SCENE 0: CARVED TEMPLE DOORS OPENING TO LORD KRISHNA (.png)
+       SCENE 0: CARVED TEMPLE DOORS -> LORD KRISHNA (.png)
        ========================================================= */
     .krishna-sanctum {
       position: absolute;
@@ -639,11 +611,13 @@
         radial-gradient(ellipse 84% 52% at 50% 34%, rgba(255, 251, 242, 0.68) 0%, rgba(252, 243, 226, 0.34) 68%, rgba(246, 230, 200, 0.08) 100%),
         linear-gradient(180deg, rgba(255, 250, 240, 0.66) 0%, rgba(255, 250, 240, 0.32) 48%, rgba(255, 250, 240, 0.02) 78%, rgba(255, 250, 240, 0.18) 100%);
       box-shadow: inset 0 0 0 1.5px rgba(156, 114, 28, 0.6), inset 0 0 0 10px rgba(212, 175, 55, 0.18);
+      pointer-events: none;
     }
 
+    /* Elevated z-index (42) so Google Maps buttons always sit ABOVE tap zones (35) */
     .ceremony-content {
       position: relative;
-      z-index: 4;
+      z-index: 42;
       width: 100%;
       display: flex;
       flex-direction: column;
@@ -724,6 +698,10 @@
     }
 
     .vibrant-map-btn {
+      position: relative;
+      z-index: 44;
+      pointer-events: auto;
+      cursor: pointer;
       margin-top: 14px;
       display: inline-flex;
       align-items: center;
@@ -817,6 +795,9 @@
     }
 
     .replay-cta {
+      position: relative;
+      z-index: 44;
+      pointer-events: auto;
       margin-top: 28px;
       background: linear-gradient(135deg, #5e1023, #330611);
       color: var(--gold-bright);
@@ -831,7 +812,7 @@
       box-shadow: 0 8px 22px rgba(42, 7, 17, 0.25);
     }
 
-    /* Tap Zones to Skip Back / Forward */
+    /* Tap Zones to Skip Back / Forward (Sits at z-index 35, below interactive buttons at 42+) */
     .tap-zones {
       position: absolute;
       inset: 60px 0 85px 0;
@@ -875,7 +856,9 @@
       <div class="tap-next" id="tap-next" title="Next"></div>
     </div>
 
-    <!-- Royal Velvet & Ornate Mandala Lotus Cover -->
+    <!-- =========================================================
+         OPENING COVER: NAMES ABOVE, TAP THE MONOGRAM BELOW TO ENTER
+         ========================================================= -->
     <div class="start-overlay" id="start-overlay">
       <div class="cover-top-group">
         <div class="start-sanskrit">॥ श्री कृष्ण प्रसन्न ॥</div>
@@ -883,59 +866,27 @@
       </div>
 
       <div class="cover-center-group">
-        <div class="cover-crest-stage">
-          <div class="royal-crest-emblem">
-            <svg viewBox="0 0 260 120" fill="none">
-              <ellipse cx="130" cy="60" rx="116" ry="48" stroke="#c9a13b" stroke-width="1.2"/>
-              <ellipse cx="130" cy="60" rx="111" ry="43" stroke="#9c721c" stroke-width="0.8" stroke-dasharray="3 4"/>
-              <circle cx="130" cy="12" r="3" fill="#c9a13b"/>
-              <circle cx="130" cy="108" r="3" fill="#c9a13b"/>
-            </svg>
-            <img class="monogram-sculpted" src="monogram.png" alt="Paras & Kalyani Monogram" />
-          </div>
-        </div>
-
         <div class="cover-couple-names">Paras &amp; Kalyani</div>
 
-        <!-- Unique Ornate Mandala Lotus Seal -->
-        <button class="mandala-seal-btn" id="start-reel-btn" aria-label="Open Wedding Invitation">
-          <svg class="mandala-outer-svg" viewBox="0 0 160 160" fill="none">
-            <circle cx="80" cy="80" r="74" stroke="#d4af37" stroke-width="0.9" stroke-dasharray="2 4" stroke-opacity="0.7"/>
-            <circle cx="80" cy="80" r="66" stroke="#ffe699" stroke-width="1.1" stroke-opacity="0.65"/>
-            <!-- 12 Lotus Petals around the Medallion -->
-            <g stroke="#f5d374" stroke-width="1" fill="rgba(212, 175, 55, 0.14)">
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(30 80 80)"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(60 80 80)"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(90 80 80)"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(120 80 80)"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(150 80 80)"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(180 80 80)"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(210 80 80)"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(240 80 80)"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(270 80 80)"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(300 80 80)"/>
-              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(330 80 80)"/>
-            </g>
-          </svg>
-
-          <div class="mandala-core">
-            <svg class="lotus-icon" viewBox="0 0 36 26" fill="none">
-              <path d="M18 3 C21 10, 21 16, 18 22 C15 16, 15 10, 18 3 Z" fill="#29050e"/>
-              <path d="M18 22 C12 18, 9 12, 11 7 C14 11, 16 16, 18 22 Z" fill="#29050e" fill-opacity="0.85"/>
-              <path d="M18 22 C24 18, 27 12, 25 7 C22 11, 20 16, 18 22 Z" fill="#29050e" fill-opacity="0.85"/>
-              <path d="M18 22 C9 21, 4 17, 5 12 C9 14, 14 18, 18 22 Z" fill="#29050e" fill-opacity="0.65"/>
-              <path d="M18 22 C27 21, 32 17, 31 12 C27 14, 22 18, 18 22 Z" fill="#29050e" fill-opacity="0.65"/>
-            </svg>
-            <span class="mandala-label-top">Open</span>
-            <span class="mandala-label-sub">Invitation</span>
+        <button class="monogram-entry-btn" id="start-reel-btn" aria-label="Tap Monogram to Open Invitation">
+          <div class="cover-crest-stage">
+            <div class="royal-crest-emblem">
+              <svg viewBox="0 0 260 120" fill="none">
+                <ellipse cx="130" cy="60" rx="116" ry="48" stroke="#c9a13b" stroke-width="1.2"/>
+                <ellipse cx="130" cy="60" rx="111" ry="43" stroke="#9c721c" stroke-width="0.8" stroke-dasharray="3 4"/>
+                <circle cx="130" cy="12" r="3" fill="#c9a13b"/>
+                <circle cx="130" cy="108" r="3" fill="#c9a13b"/>
+              </svg>
+              <img class="monogram-sculpted" src="monogram.png" alt="Paras & Kalyani Monogram" />
+            </div>
           </div>
+          <span class="tap-crest-hint">Tap Emblem to Enter</span>
         </button>
       </div>
 
       <div class="cover-poetic-footer">
-        Two destinies woven in grace<br>
-        Step into our celebration
+        Two destinies woven in grace.<br>
+        Step into our celebration.
       </div>
     </div>
 
@@ -993,7 +944,7 @@
     </section>
 
     <!-- =========================================================
-         SCENE 2: SANGEET & ENGAGEMENT (BRIGHT LUMINOUS THEME)
+         SCENE 2: SANGEET & ENGAGEMENT (WORKING MAPS BUTTON)
          ========================================================= -->
     <section class="scene ceremony-scene" data-duration="7000">
       <img
@@ -1029,7 +980,7 @@
     </section>
 
     <!-- =========================================================
-         SCENE 3: WEDDING CEREMONY (BRIGHT LUMINOUS THEME + SPARKS)
+         SCENE 3: WEDDING CEREMONY (WORKING MAPS BUTTON + SPARKS)
          ========================================================= -->
     <section class="scene ceremony-scene" data-duration="8000">
       <img
@@ -1069,7 +1020,7 @@
     </section>
 
     <!-- =========================================================
-         SCENE 4: GRAND RECEPTION (BRIGHT LUMINOUS THEME)
+         SCENE 4: GRAND RECEPTION (WORKING MAPS BUTTON)
          ========================================================= -->
     <section class="scene ceremony-scene" data-duration="7000">
       <img
@@ -1171,6 +1122,13 @@
         s.style.animationDelay = (Math.random() * 1.4) + 's';
         box.appendChild(s);
       }
+    });
+
+    /* Prevent map buttons from triggering slide taps */
+    document.querySelectorAll('.vibrant-map-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
     });
 
     /* =========================================================
