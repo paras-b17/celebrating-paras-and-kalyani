@@ -1,0 +1,1356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Paras weds Kalyani | Royal Wedding Reel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Great+Vibes&family=Noto+Serif+Devanagari:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold-bright: #ffe699;
+      --gold-main: #d4af37;
+      --gold-deep: #8f6214;
+      --maroon-deep: #24050d;
+      --maroon-rich: #4f0e1d;
+      --cream-soft: #fff8eb;
+      --parchment-bg: #f6ecda;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(circle at center, #2b0711 0%, #0d0104 100%);
+      font-family: 'Cormorant Garamond', serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    /* 9:16 Vertical Reel Container */
+    .reel-frame {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      height: 746px;
+      max-height: 95vh;
+      aspect-ratio: 9 / 16;
+      border-radius: 22px;
+      overflow: hidden;
+      background: #1a0409;
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.9),
+        0 0 0 1.5px rgba(212, 175, 55, 0.65);
+      user-select: none;
+    }
+
+    /* Top Story/Reel Progress Segments */
+    .reel-progress-bar {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      right: 12px;
+      z-index: 60;
+      display: flex;
+      gap: 5px;
+      pointer-events: none;
+    }
+
+    .progress-segment {
+      flex: 1;
+      height: 3px;
+      background: rgba(92, 16, 34, 0.28);
+      border-radius: 99px;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(255, 255, 255, 0.4);
+    }
+
+    .progress-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #b8841e, #6b1126);
+      border-radius: 99px;
+      transition: width 0.1s linear;
+    }
+
+    .progress-segment.done .progress-fill {
+      width: 100%;
+    }
+
+    /* Top Controls (Mute / Pause) */
+    .reel-controls {
+      position: absolute;
+      top: 24px;
+      right: 14px;
+      z-index: 60;
+      display: flex;
+      gap: 8px;
+    }
+
+    .ctrl-pill {
+      background: rgba(42, 6, 15, 0.78);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(212, 175, 55, 0.65);
+      color: var(--gold-bright);
+      padding: 5px 11px;
+      border-radius: 999px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    /* Floating Rose Petals Layer */
+    #fx-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 45;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      top: -30px;
+      pointer-events: none;
+      animation: petalFall linear forwards;
+    }
+
+    @keyframes petalFall {
+      0% { transform: translate3d(0, -5vh, 0) rotate(0deg); opacity: 0; }
+      15% { opacity: 0.95; }
+      85% { opacity: 0.9; }
+      100% { transform: translate3d(var(--drift), 105vh, 0) rotate(320deg); opacity: 0; }
+    }
+
+    /* =========================================================
+       SCULPTED MONOGRAM STYLING (NO RECTANGULAR BOX EDGES)
+       ========================================================= */
+    .monogram-sculpted {
+      display: block;
+      mix-blend-mode: multiply;
+      filter: brightness(1.08) contrast(1.38) saturate(1.35);
+      -webkit-mask-image: radial-gradient(ellipse 46% 36% at 50% 50%, #000 58%, rgba(0, 0, 0, 0.65) 76%, transparent 96%);
+      mask-image: radial-gradient(ellipse 46% 36% at 50% 50%, #000 58%, rgba(0, 0, 0, 0.65) 76%, transparent 96%);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Royal Crest Emblem Wrapper */
+    .royal-crest-emblem {
+      position: relative;
+      width: 248px;
+      height: 112px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .royal-crest-emblem svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .royal-crest-emblem img {
+      position: relative;
+      z-index: 2;
+      width: 215px;
+      height: auto;
+    }
+
+    /* =========================================================
+       ROYAL VELVET & MANDALA LOTUS MEDALLION COVER OVERLAY
+       ========================================================= */
+    .start-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 70;
+      background:
+        radial-gradient(circle at 50% 42%, rgba(92, 16, 36, 0.88) 0%, rgba(26, 4, 10, 0.97) 75%, #0e0104 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      text-align: center;
+      padding: 46px 26px 38px;
+      transition: opacity 0.75s ease, visibility 0.75s ease, transform 0.75s ease;
+    }
+
+    .start-overlay::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 16px;
+      pointer-events: none;
+    }
+
+    .start-overlay::after {
+      content: "";
+      position: absolute;
+      inset: 20px;
+      border: 1px dashed rgba(212, 175, 55, 0.25);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .start-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(1.04);
+      pointer-events: none;
+    }
+
+    .cover-top-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .start-sanskrit {
+      font-family: 'Noto Serif Devanagari', serif;
+      color: var(--gold-bright);
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      margin-bottom: 18px;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, 0.8);
+    }
+
+    .cover-sub-kicker {
+      font-family: 'Cinzel', serif;
+      font-size: 0.66rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(248, 224, 152, 0.85);
+      padding-top: 6px;
+    }
+
+    .cover-center-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: -4px;
+    }
+
+    /* Luminous Parchment Halo Behind Cover Monogram */
+    .cover-crest-stage {
+      position: relative;
+      width: 260px;
+      height: 118px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .cover-crest-stage::before {
+      content: "";
+      position: absolute;
+      inset: 8px 14px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, #fdf7eb 50%, rgba(242, 224, 191, 0.88) 76%, transparent 100%);
+      box-shadow: 0 0 32px rgba(212, 175, 55, 0.28);
+    }
+
+    .cover-couple-names {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.75rem;
+      color: #fff3d1;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
+      margin-bottom: 18px;
+    }
+
+    /* Unique Ornate Mandala Lotus Medallion Trigger */
+    .mandala-seal-btn {
+      position: relative;
+      width: 146px;
+      height: 146px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.25s ease;
+    }
+
+    .mandala-seal-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .mandala-outer-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.85));
+      animation: mandalaSpin 28s linear infinite;
+    }
+
+    @keyframes mandalaSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .mandala-core {
+      position: relative;
+      z-index: 2;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 28%, #fff1b8 0%, #d4a334 55%, #7c5209 100%);
+      border: 1.5px solid #fff3c4;
+      box-shadow:
+        0 0 0 4px rgba(41, 5, 14, 0.72),
+        0 0 0 5.5px rgba(212, 175, 55, 0.65),
+        inset 0 2px 8px rgba(255, 255, 255, 0.75);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #29050e;
+      animation: corePulse 2.6s ease-in-out infinite;
+    }
+
+    @keyframes corePulse {
+      0%, 100% { box-shadow: 0 0 0 4px rgba(41, 5, 14, 0.72), 0 0 0 5.5px rgba(212, 175, 55, 0.65), 0 0 20px rgba(212, 175, 55, 0.25); }
+      50% { box-shadow: 0 0 0 4px rgba(41, 5, 14, 0.72), 0 0 0 6.5px rgba(255, 230, 153, 0.9), 0 0 34px rgba(212, 175, 55, 0.5); }
+    }
+
+    .lotus-icon {
+      width: 30px;
+      height: 22px;
+      margin-bottom: 3px;
+    }
+
+    .mandala-label-top {
+      font-family: 'Cinzel', serif;
+      font-size: 0.56rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      line-height: 1.15;
+    }
+
+    .mandala-label-sub {
+      font-family: 'Cinzel', serif;
+      font-size: 0.48rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-top: 1px;
+    }
+
+    .cover-poetic-footer {
+      color: #f6e3ba;
+      font-style: italic;
+      font-size: 1.06rem;
+      letter-spacing: 0.03em;
+      opacity: 0.94;
+      line-height: 1.42;
+    }
+
+    /* =========================================================
+       SCENE ARCHITECTURE
+       ========================================================= */
+    .scene {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.9s ease, visibility 0.9s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .scene.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* =========================================================
+       SCENE 0: CARVED TEMPLE DOORS OPENING TO LORD KRISHNA (.png)
+       ========================================================= */
+    .krishna-sanctum {
+      position: absolute;
+      inset: 0;
+      background: #f5ebd8;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .krishna-full-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center bottom;
+      transform: scale(0.96);
+      transition: transform 6s ease-out;
+      z-index: 1;
+    }
+
+    .scene.active .krishna-full-img {
+      transform: scale(1.03);
+    }
+
+    /* 3D Carved Wooden Temple Doors */
+    .temple-doors {
+      position: absolute;
+      inset: 0;
+      z-index: 10;
+      display: flex;
+      perspective: 1400px;
+      pointer-events: none;
+    }
+
+    .t-door {
+      width: 50%;
+      height: 100%;
+      background:
+        repeating-linear-gradient(90deg, rgba(0,0,0,0.12) 0px, rgba(0,0,0,0.12) 2px, transparent 2px, transparent 14px),
+        linear-gradient(180deg, #4b2312 0%, #2d1208 50%, #3d1b0d 100%);
+      border: 3px solid #8c5828;
+      position: relative;
+      transition: transform 2.3s cubic-bezier(0.45, 0.05, 0.25, 1) 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .t-door-left {
+      transform-origin: left center;
+      border-right: 2px solid #c59149;
+    }
+
+    .t-door-right {
+      transform-origin: right center;
+      border-left: 2px solid #c59149;
+    }
+
+    .scene.active .t-door-left {
+      transform: rotateY(-108deg);
+    }
+
+    .scene.active .t-door-right {
+      transform: rotateY(108deg);
+    }
+
+    .brass-knocker {
+      width: 74px;
+      height: 74px;
+      border-radius: 50%;
+      border: 4px solid #c99649;
+      background: radial-gradient(circle, #70421d, #3a1d09);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.65), inset 0 0 10px rgba(255, 215, 130, 0.4);
+      position: relative;
+    }
+
+    .brass-knocker::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border-radius: 50%;
+      border: 3px solid #e0b263;
+    }
+
+    /* =========================================================
+       SCENE 1 (MERGED): FORMAL BLESSINGS & NAMES ABOVE + HANDS BELOW
+       ========================================================= */
+    .united-blessings-scene {
+      background:
+        radial-gradient(ellipse at center, #fffaf0 0%, #f4e4c8 68%, #dfc399 100%);
+      justify-content: flex-start;
+      padding: 58px 24px 20px;
+    }
+
+    .blessings-border {
+      position: absolute;
+      inset: 16px;
+      border: 1.5px solid rgba(156, 114, 28, 0.55);
+      border-radius: 16px;
+      box-shadow: inset 0 0 0 5px rgba(212, 175, 55, 0.12);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    .united-top-stack {
+      position: relative;
+      z-index: 4;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .bless-line {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+
+    .scene.active .bless-1 { animation: riseIn 0.85s ease 0.25s forwards; }
+    .scene.active .bless-2 { animation: riseIn 0.85s ease 0.9s forwards; }
+    .scene.active .bless-3 { animation: riseIn 0.85s ease 1.5s forwards; }
+    .scene.active .bless-4 { animation: riseIn 0.85s ease 2.1s forwards; }
+
+    @keyframes riseIn {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .bless-intro {
+      font-size: 1.08rem;
+      font-style: italic;
+      color: #5e2432;
+      line-height: 1.38;
+      margin-bottom: 10px;
+    }
+
+    .bless-couple-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.85rem;
+      color: #520e1e;
+      line-height: 1.0;
+    }
+
+    .bless-parents {
+      font-size: 0.98rem;
+      font-weight: 600;
+      color: #4a1c27;
+      margin-top: 2px;
+    }
+
+    .bless-monogram-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      margin: 2px 0;
+      gap: 8px;
+    }
+
+    .bless-monogram-divider::before,
+    .bless-monogram-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(156, 114, 28, 0.6), transparent);
+    }
+
+    .bless-monogram-divider img {
+      width: 175px;
+      height: auto;
+    }
+
+    /* Soft ambient glow behind hands at the bottom */
+    .united-blessings-scene::before {
+      content: "";
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      width: 300px;
+      height: 190px;
+      transform: translateX(-50%);
+      background: radial-gradient(ellipse at center, rgba(255, 252, 245, 0.88) 0%, rgba(255, 252, 245, 0) 74%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Seamlessly blended hands positioned neatly below the names */
+    .hands-bottom-img {
+      position: absolute;
+      bottom: -14px;
+      left: 50%;
+      width: 52%;
+      max-width: 222px;
+      height: auto;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      filter: contrast(1.08) saturate(1.12);
+      -webkit-mask-image: radial-gradient(ellipse 46% 46% at 50% 50%, #000 54%, rgba(0, 0, 0, 0.6) 74%, transparent 96%);
+      mask-image: radial-gradient(ellipse 46% 46% at 50% 50%, #000 54%, rgba(0, 0, 0, 0.6) 74%, transparent 96%);
+      transform: translateX(-50%) rotate(-90deg) scale(1.03);
+      opacity: 0;
+      transition: transform 7s ease-out, opacity 1.1s ease 2.4s;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .scene.active .hands-bottom-img {
+      opacity: 1;
+      transform: translateX(-50%) rotate(-90deg) scale(0.97);
+    }
+
+    /* =========================================================
+       SCENES 2, 3, 4: BRIGHT LUMINOUS CEREMONY THEME (SHIFTED UP)
+       ========================================================= */
+    .ceremony-scene {
+      background: #fdf6e9;
+      justify-content: flex-start;
+      padding: 66px 24px 28px;
+      color: #4f0e1d;
+    }
+
+    .light-bg-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(1.12) contrast(1.04) saturate(1.22);
+      transform: scale(1.06);
+      transition: transform 7s ease-out;
+      z-index: 0;
+    }
+
+    .scene.active .light-bg-img {
+      transform: scale(1);
+    }
+
+    .luminous-ivory-veil {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background:
+        radial-gradient(ellipse 84% 52% at 50% 34%, rgba(255, 251, 242, 0.68) 0%, rgba(252, 243, 226, 0.34) 68%, rgba(246, 230, 200, 0.08) 100%),
+        linear-gradient(180deg, rgba(255, 250, 240, 0.66) 0%, rgba(255, 250, 240, 0.32) 48%, rgba(255, 250, 240, 0.02) 78%, rgba(255, 250, 240, 0.18) 100%);
+      box-shadow: inset 0 0 0 1.5px rgba(156, 114, 28, 0.6), inset 0 0 0 10px rgba(212, 175, 55, 0.18);
+    }
+
+    .ceremony-content {
+      position: relative;
+      z-index: 4;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .c-anim {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .scene.active .c-1 { animation: riseIn 0.85s ease 0.25s forwards; }
+    .scene.active .c-2 { animation: riseIn 0.85s ease 0.85s forwards; }
+    .scene.active .c-3 { animation: riseIn 0.85s ease 1.45s forwards; }
+    .scene.active .c-4 { animation: riseIn 0.85s ease 2.05s forwards; }
+
+    .ceremony-sanskrit {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 1.04rem;
+      font-weight: 700;
+      color: #85580f;
+      letter-spacing: 0.06em;
+      margin-bottom: 2px;
+      text-shadow: 0 0 14px rgba(255, 252, 245, 1), 0 1px 6px rgba(255, 252, 245, 0.95);
+    }
+
+    .ceremony-heading {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3.1rem;
+      font-weight: 400;
+      color: #4a0a18;
+      line-height: 1.04;
+      text-shadow: 0 0 18px rgba(255, 252, 245, 1), 0 2px 10px rgba(255, 252, 245, 0.98);
+      margin-bottom: 4px;
+    }
+
+    .gold-line-ornament {
+      width: 185px;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, #8f6214, transparent);
+      margin: 8px auto 12px;
+    }
+
+    .ceremony-date {
+      font-family: 'Cinzel', serif;
+      font-size: 1.12rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      color: #450916;
+      text-shadow: 0 0 16px rgba(255, 252, 245, 1), 0 1px 8px rgba(255, 252, 245, 0.98);
+    }
+
+    .ceremony-time {
+      font-size: 1.12rem;
+      font-style: italic;
+      font-weight: 700;
+      color: #5e1a29;
+      margin-top: 2px;
+      text-shadow: 0 0 14px rgba(255, 252, 245, 1), 0 1px 8px rgba(255, 252, 245, 0.98);
+    }
+
+    .venue-heading {
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.08rem;
+      color: #85580f;
+      margin-top: 10px;
+      margin-bottom: 1px;
+      text-shadow: 0 0 16px rgba(255, 252, 245, 1), 0 1px 8px rgba(255, 252, 245, 0.98);
+    }
+
+    .venue-address {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #360711;
+      line-height: 1.38;
+      max-width: 310px;
+      text-shadow: 0 0 18px rgba(255, 252, 245, 1), 0 1px 10px rgba(255, 252, 245, 0.98);
+    }
+
+    .vibrant-map-btn {
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      text-decoration: none;
+      background: linear-gradient(135deg, #5e1023, #380713);
+      border: 1px solid #d4af37;
+      color: #ffeaa8;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      box-shadow: 0 8px 22px rgba(61, 9, 21, 0.28);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .vibrant-map-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(61, 9, 21, 0.36);
+    }
+
+    /* Golden Sparkler Fireworks on Wedding Scene */
+    .firework-fountain {
+      position: absolute;
+      bottom: 18px;
+      width: 90px;
+      height: 160px;
+      pointer-events: none;
+      z-index: 3;
+    }
+    .fw-left { left: 10px; }
+    .fw-right { right: 10px; transform: scaleX(-1); }
+
+    .spark {
+      position: absolute;
+      bottom: 0;
+      left: 35px;
+      width: 3.5px;
+      height: 3.5px;
+      border-radius: 50%;
+      background: #d97706;
+      box-shadow: 0 0 8px #f59e0b, 0 0 14px #b45309;
+      opacity: 0;
+    }
+
+    .scene.active .spark {
+      animation: fountainShoot 1.4s ease-out infinite;
+    }
+
+    @keyframes fountainShoot {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      100% { transform: translate(var(--sx), var(--sy)) scale(0.2); opacity: 0; }
+    }
+
+    /* =========================================================
+       SCENE 5: CLOSING FAMILY COMPLIMENTS + SCULPTED CREST
+       ========================================================= */
+    .closing-scene {
+      background: radial-gradient(ellipse at center, #fffaf0 0%, #f3e2c3 70%, #dec092 100%);
+      padding: 38px 28px;
+    }
+
+    .closing-quote {
+      font-size: 1.15rem;
+      font-style: italic;
+      color: #4f121d;
+      line-height: 1.5;
+      max-width: 320px;
+      margin: 8px 0 22px;
+    }
+
+    .compliments-title {
+      font-family: 'Cinzel', serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin-bottom: 10px;
+    }
+
+    .family-signature-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.65rem;
+      font-weight: 700;
+      color: #5c1022;
+      letter-spacing: 0.02em;
+    }
+
+    .replay-cta {
+      margin-top: 28px;
+      background: linear-gradient(135deg, #5e1023, #330611);
+      color: var(--gold-bright);
+      border: 1px solid var(--gold-main);
+      padding: 10px 24px;
+      border-radius: 999px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(42, 7, 17, 0.25);
+    }
+
+    /* Tap Zones to Skip Back / Forward */
+    .tap-zones {
+      position: absolute;
+      inset: 60px 0 85px 0;
+      z-index: 35;
+      display: flex;
+    }
+    .tap-prev { width: 32%; height: 100%; cursor: pointer; }
+    .tap-next { width: 68%; height: 100%; cursor: pointer; }
+  </style>
+</head>
+<body>
+
+  <!-- Vaaroon (.mp4) Background Audio Track -->
+  <video id="bg-audio" loop playsinline preload="auto" style="display:none">
+    <source src="vaaroon.mp4" type="video/mp4">
+  </video>
+
+  <div class="reel-frame" id="reel-frame">
+    <!-- Top Reel Story Progress Bars (6 Scenes) -->
+    <div class="reel-progress-bar" id="progress-bar">
+      <div class="progress-segment"><div class="progress-fill"></div></div>
+      <div class="progress-segment"><div class="progress-fill"></div></div>
+      <div class="progress-segment"><div class="progress-fill"></div></div>
+      <div class="progress-segment"><div class="progress-fill"></div></div>
+      <div class="progress-segment"><div class="progress-fill"></div></div>
+      <div class="progress-segment"><div class="progress-fill"></div></div>
+    </div>
+
+    <!-- Top Right Music & Pause Controls -->
+    <div class="reel-controls">
+      <button class="ctrl-pill" id="pause-btn">❚❚ Pause</button>
+      <button class="ctrl-pill" id="mute-btn">♪ Vaaroon</button>
+    </div>
+
+    <!-- Floating Rose Petals Layer -->
+    <div id="fx-layer"></div>
+
+    <!-- Tap Zones -->
+    <div class="tap-zones" id="tap-zones">
+      <div class="tap-prev" id="tap-prev" title="Previous"></div>
+      <div class="tap-next" id="tap-next" title="Next"></div>
+    </div>
+
+    <!-- Royal Velvet & Ornate Mandala Lotus Cover -->
+    <div class="start-overlay" id="start-overlay">
+      <div class="cover-top-group">
+        <div class="start-sanskrit">॥ श्री कृष्ण प्रसन्न ॥</div>
+        <div class="cover-sub-kicker">A Sacred Union</div>
+      </div>
+
+      <div class="cover-center-group">
+        <div class="cover-crest-stage">
+          <div class="royal-crest-emblem">
+            <svg viewBox="0 0 260 120" fill="none">
+              <ellipse cx="130" cy="60" rx="116" ry="48" stroke="#c9a13b" stroke-width="1.2"/>
+              <ellipse cx="130" cy="60" rx="111" ry="43" stroke="#9c721c" stroke-width="0.8" stroke-dasharray="3 4"/>
+              <circle cx="130" cy="12" r="3" fill="#c9a13b"/>
+              <circle cx="130" cy="108" r="3" fill="#c9a13b"/>
+            </svg>
+            <img class="monogram-sculpted" src="monogram.png" alt="Paras & Kalyani Monogram" />
+          </div>
+        </div>
+
+        <div class="cover-couple-names">Paras &amp; Kalyani</div>
+
+        <!-- Unique Ornate Mandala Lotus Seal -->
+        <button class="mandala-seal-btn" id="start-reel-btn" aria-label="Open Wedding Invitation">
+          <svg class="mandala-outer-svg" viewBox="0 0 160 160" fill="none">
+            <circle cx="80" cy="80" r="74" stroke="#d4af37" stroke-width="0.9" stroke-dasharray="2 4" stroke-opacity="0.7"/>
+            <circle cx="80" cy="80" r="66" stroke="#ffe699" stroke-width="1.1" stroke-opacity="0.65"/>
+            <!-- 12 Lotus Petals around the Medallion -->
+            <g stroke="#f5d374" stroke-width="1" fill="rgba(212, 175, 55, 0.14)">
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(30 80 80)"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(60 80 80)"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(90 80 80)"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(120 80 80)"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(150 80 80)"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(180 80 80)"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(210 80 80)"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(240 80 80)"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(270 80 80)"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(300 80 80)"/>
+              <path d="M80 6 Q87 18 80 26 Q73 18 80 6 Z" transform="rotate(330 80 80)"/>
+            </g>
+          </svg>
+
+          <div class="mandala-core">
+            <svg class="lotus-icon" viewBox="0 0 36 26" fill="none">
+              <path d="M18 3 C21 10, 21 16, 18 22 C15 16, 15 10, 18 3 Z" fill="#29050e"/>
+              <path d="M18 22 C12 18, 9 12, 11 7 C14 11, 16 16, 18 22 Z" fill="#29050e" fill-opacity="0.85"/>
+              <path d="M18 22 C24 18, 27 12, 25 7 C22 11, 20 16, 18 22 Z" fill="#29050e" fill-opacity="0.85"/>
+              <path d="M18 22 C9 21, 4 17, 5 12 C9 14, 14 18, 18 22 Z" fill="#29050e" fill-opacity="0.65"/>
+              <path d="M18 22 C27 21, 32 17, 31 12 C27 14, 22 18, 18 22 Z" fill="#29050e" fill-opacity="0.65"/>
+            </svg>
+            <span class="mandala-label-top">Open</span>
+            <span class="mandala-label-sub">Invitation</span>
+          </div>
+        </button>
+      </div>
+
+      <div class="cover-poetic-footer">
+        Two destinies woven in grace<br>
+        Step into our celebration
+      </div>
+    </div>
+
+    <!-- =========================================================
+         SCENE 0: CARVED TEMPLE DOORS -> LORD KRISHNA (.png)
+         ========================================================= -->
+    <section class="scene" data-duration="6200">
+      <div class="krishna-sanctum">
+        <img
+          class="krishna-full-img"
+          src="krishna-opening.png"
+          alt="Lord Krishna"
+        />
+      </div>
+
+      <!-- 3D Opening Carved Temple Doors -->
+      <div class="temple-doors">
+        <div class="t-door t-door-left"><div class="brass-knocker"></div></div>
+        <div class="t-door t-door-right"><div class="brass-knocker"></div></div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCENE 1: BLESSINGS OF LORD KRISHNA + NAMES ABOVE + HANDS BELOW
+         ========================================================= -->
+    <section class="scene united-blessings-scene" data-duration="8500">
+      <div class="blessings-border"></div>
+
+      <div class="united-top-stack">
+        <p class="bless-intro bless-line bless-1">
+          With the blessings of Lord Krishna,<br>
+          we cordially invite you to the wedding of
+        </p>
+
+        <div class="bless-line bless-2">
+          <div class="bless-couple-name">Paras</div>
+          <div class="bless-parents">S/o Mrs. Sunanda &amp; Mr. Sanjay Bodhare</div>
+        </div>
+
+        <div class="bless-monogram-divider bless-line bless-3">
+          <img class="monogram-sculpted" src="monogram.png" alt="P & K Monogram" />
+        </div>
+
+        <div class="bless-line bless-4">
+          <div class="bless-couple-name">Kalyani</div>
+          <div class="bless-parents">D/o Mrs. Poonam &amp; Mr. Jayant Mankar</div>
+        </div>
+      </div>
+
+      <img
+        class="hands-bottom-img"
+        src="krishna-hands.jpeg"
+        alt="Divine Union Hands"
+      />
+    </section>
+
+    <!-- =========================================================
+         SCENE 2: SANGEET & ENGAGEMENT (BRIGHT LUMINOUS THEME)
+         ========================================================= -->
+    <section class="scene ceremony-scene" data-duration="7000">
+      <img
+        class="light-bg-img"
+        src="https://i.pinimg.com/236x/32/e7/00/32e700b2def157010fb9b446ebeb11c0.jpg"
+        alt=""
+        referrerpolicy="no-referrer"
+      />
+      <div class="luminous-ivory-veil"></div>
+
+      <div class="ceremony-content">
+        <h2 class="ceremony-heading c-anim c-1">Sangeet &amp; Engagement</h2>
+
+        <div class="gold-line-ornament c-anim c-2"></div>
+
+        <div class="c-anim c-2">
+          <div class="ceremony-date">Saturday, 26th December 2026</div>
+          <div class="ceremony-time">Time : 7:00 PM Onwards</div>
+        </div>
+
+        <div class="c-anim c-3">
+          <div class="venue-heading">Venue</div>
+          <p class="venue-address">
+            Renuka Celebration Hall,<br>
+            Sainagar, Badnera Road, Amravati
+          </p>
+        </div>
+
+        <a class="vibrant-map-btn c-anim c-4" href="https://www.google.com/maps/search/?api=1&query=Renuka+Celebration+Hall+Sainagar+Badnera+Road+Amravati" target="_blank" rel="noopener noreferrer">
+          📍 View on Google Maps
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCENE 3: WEDDING CEREMONY (BRIGHT LUMINOUS THEME + SPARKS)
+         ========================================================= -->
+    <section class="scene ceremony-scene" data-duration="8000">
+      <img
+        class="light-bg-img"
+        src="https://www.shutterstock.com/shutterstock/videos/4190067509/thumb/10.jpg?ip=x480"
+        alt=""
+        referrerpolicy="no-referrer"
+      />
+      <div class="luminous-ivory-veil"></div>
+
+      <div class="firework-fountain fw-left" id="fw-left"></div>
+      <div class="firework-fountain fw-right" id="fw-right"></div>
+
+      <div class="ceremony-content">
+        <div class="ceremony-sanskrit c-anim c-1">॥ शुभविवाह ॥</div>
+        <h2 class="ceremony-heading c-anim c-1">Wedding Ceremony</h2>
+
+        <div class="gold-line-ornament c-anim c-2"></div>
+
+        <div class="c-anim c-2">
+          <div class="ceremony-date">Sunday, 27th December 2026</div>
+          <div class="ceremony-time">Muhurat : 11:10 AM Onwards</div>
+        </div>
+
+        <div class="c-anim c-3">
+          <div class="venue-heading">Venue</div>
+          <p class="venue-address">
+            Renuka Celebration Hall,<br>
+            Sainagar, Badnera Road, Amravati
+          </p>
+        </div>
+
+        <a class="vibrant-map-btn c-anim c-4" href="https://www.google.com/maps/search/?api=1&query=Renuka+Celebration+Hall+Sainagar+Badnera+Road+Amravati" target="_blank" rel="noopener noreferrer">
+          📍 View on Google Maps
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCENE 4: GRAND RECEPTION (BRIGHT LUMINOUS THEME)
+         ========================================================= -->
+    <section class="scene ceremony-scene" data-duration="7000">
+      <img
+        class="light-bg-img"
+        src="https://i.pinimg.com/236x/da/c0/06/dac0065f78b74e0eb47271b0cf161ec8.jpg"
+        alt=""
+        referrerpolicy="no-referrer"
+      />
+      <div class="luminous-ivory-veil"></div>
+
+      <div class="ceremony-content">
+        <div class="ceremony-sanskrit c-anim c-1">॥ स्वागत समारंभ ॥</div>
+        <h2 class="ceremony-heading c-anim c-1">Grand Reception</h2>
+
+        <div class="gold-line-ornament c-anim c-2"></div>
+
+        <div class="c-anim c-2">
+          <div class="ceremony-date">Monday, 28th December 2026</div>
+          <div class="ceremony-time">Time : 7:00 PM Onwards</div>
+        </div>
+
+        <div class="c-anim c-3">
+          <div class="venue-heading">Venue</div>
+          <p class="venue-address">
+            Shri Wankhede Celebration Lawn,<br>
+            Kalamna, Umred Road, Nagpur
+          </p>
+        </div>
+
+        <a class="vibrant-map-btn c-anim c-4" href="https://www.google.com/maps/search/?api=1&query=Shri+Wankhede+Celebration+Lawn+Kalamna+Umred+Road+Nagpur" target="_blank" rel="noopener noreferrer">
+          📍 View on Google Maps
+        </a>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         SCENE 5: CLOSING FAMILY COMPLIMENTS + SCULPTED CREST
+         ========================================================= -->
+    <section class="scene closing-scene" data-duration="6500">
+      <div class="blessings-border"></div>
+
+      <div class="royal-crest-emblem bless-line bless-1">
+        <svg viewBox="0 0 260 120" fill="none">
+          <ellipse cx="130" cy="60" rx="116" ry="48" stroke="#b88928" stroke-width="1.1" stroke-opacity="0.75"/>
+          <ellipse cx="130" cy="60" rx="111" ry="43" stroke="#9c721c" stroke-width="0.7" stroke-dasharray="3 4" stroke-opacity="0.75"/>
+          <circle cx="130" cy="12" r="2.8" fill="#9c721c"/>
+          <circle cx="130" cy="108" r="2.8" fill="#9c721c"/>
+        </svg>
+        <img class="monogram-sculpted" src="monogram.png" alt="Paras & Kalyani Monogram" />
+      </div>
+
+      <p class="closing-quote bless-line bless-2">
+        We request the honour of your presence and blessings on this joyous occasion.<br>
+        Your presence will make our celebration truly special.
+      </p>
+
+      <div class="bless-line bless-3">
+        <div class="compliments-title">With Best Compliments From</div>
+        <div class="family-signature-en">Bodhare and Mankar Family</div>
+      </div>
+
+      <button class="replay-cta bless-line bless-4" id="replay-btn">↻ Replay Invitation</button>
+    </section>
+  </div>
+
+  <script>
+    /* =========================================================
+       1. FLOATING ROSE PETALS & GOLDEN FIREWORK SPARKS
+       ========================================================= */
+    const fxLayer = document.getElementById('fx-layer');
+    const petalShades = ['#e11d48', '#be123c', '#fb7185', '#f43f5e'];
+
+    function spawnPetal() {
+      const p = document.createElement('div');
+      p.className = 'petal';
+      const size = 12 + Math.random() * 12;
+      const dur = 5 + Math.random() * 4;
+      const color = petalShades[Math.floor(Math.random() * petalShades.length)];
+      p.style.left = (Math.random() * 100) + '%';
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animationDuration = dur + 's';
+      p.style.setProperty('--drift', (Math.random() * 140 - 70) + 'px');
+      p.innerHTML = `<svg viewBox="0 0 30 30" width="100%" height="100%"><path d="M15 2 C24 5, 28 14, 24 22 C20 28, 12 29, 7 24 C2 19, 3 10, 10 4 Z" fill="${color}"/></svg>`;
+      fxLayer.appendChild(p);
+      setTimeout(() => p.remove(), dur * 1000 + 150);
+    }
+    setInterval(spawnPetal, 550);
+
+    ['fw-left', 'fw-right'].forEach(id => {
+      const box = document.getElementById(id);
+      for (let i = 0; i < 24; i++) {
+        const s = document.createElement('span');
+        s.className = 'spark';
+        const angle = (-25 + Math.random() * 65) * (Math.PI / 180);
+        const dist = 70 + Math.random() * 95;
+        s.style.setProperty('--sx', Math.sin(angle) * dist + 'px');
+        s.style.setProperty('--sy', -Math.cos(angle) * dist + 'px');
+        s.style.animationDelay = (Math.random() * 1.4) + 's';
+        box.appendChild(s);
+      }
+    });
+
+    /* =========================================================
+       2. VAAROON (.mp4) AUDIO PLAYER WITH SYNTH FALLBACK
+       ========================================================= */
+    const bgAudio = document.getElementById('bg-audio');
+    const muteBtn = document.getElementById('mute-btn');
+    let audioCtx = null;
+    let isMuted = false;
+    let usingMediaFile = false;
+
+    const vaaroonNotes = [
+      { f: 329.63, d: 0.45, drone: 164.81 },
+      { f: 392.00, d: 0.45 },
+      { f: 440.00, d: 0.75 },
+      { f: 493.88, d: 0.45 },
+      { f: 523.25, d: 0.90, drone: 130.81 },
+      { f: 493.88, d: 0.45 },
+      { f: 440.00, d: 0.45 },
+      { f: 392.00, d: 0.90 },
+      { f: 329.63, d: 1.15, drone: 164.81 }
+    ];
+
+    function playFallbackNote(freq, dur, drone) {
+      if (!audioCtx || isMuted) return;
+      const now = audioCtx.currentTime;
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(freq, now);
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.exponentialRampToValueAtTime(0.08, now + 0.1);
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + dur + 0.2);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start(now);
+      osc.stop(now + dur + 0.25);
+
+      if (drone) {
+        const dOsc = audioCtx.createOscillator();
+        const dGain = audioCtx.createGain();
+        dOsc.type = 'triangle';
+        dOsc.frequency.setValueAtTime(drone, now);
+        dGain.gain.setValueAtTime(0.0001, now);
+        dGain.gain.exponentialRampToValueAtTime(0.04, now + 0.15);
+        dGain.gain.exponentialRampToValueAtTime(0.0001, now + 2.0);
+        dOsc.connect(dGain);
+        dGain.connect(audioCtx.destination);
+        dOsc.start(now);
+        dOsc.stop(now + 2.1);
+      }
+    }
+
+    function startSynthFallback() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      let idx = 0;
+      function step() {
+        const n = vaaroonNotes[idx % vaaroonNotes.length];
+        playFallbackNote(n.f, n.d, n.drone);
+        idx++;
+        setTimeout(step, n.d * 1000);
+      }
+      step();
+    }
+
+    function startAudio() {
+      bgAudio.muted = false;
+      bgAudio.volume = 1.0;
+      bgAudio.play().then(() => {
+        usingMediaFile = true;
+      }).catch(() => {
+        usingMediaFile = false;
+        startSynthFallback();
+      });
+    }
+
+    muteBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      isMuted = !isMuted;
+      if (usingMediaFile) {
+        bgAudio.muted = isMuted;
+      }
+      muteBtn.textContent = isMuted ? '✕ Muted' : '♪ Vaaroon';
+    });
+
+    /* =========================================================
+       3. REEL TIMELINE SEQUENCER
+       ========================================================= */
+    const scenes = Array.from(document.querySelectorAll('.scene'));
+    const segments = Array.from(document.querySelectorAll('.progress-segment'));
+    const fills = Array.from(document.querySelectorAll('.progress-fill'));
+    const startOverlay = document.getElementById('start-overlay');
+    const startBtn = document.getElementById('start-reel-btn');
+    const pauseBtn = document.getElementById('pause-btn');
+    const replayBtn = document.getElementById('replay-btn');
+
+    let currentScene = 0;
+    let isPaused = false;
+    let elapsed = 0;
+    let lastTick = null;
+
+    function showScene(index) {
+      if (index < 0) index = 0;
+      if (index >= scenes.length) {
+        isPaused = true;
+        pauseBtn.textContent = '▶ Play';
+        return;
+      }
+
+      scenes.forEach((s, i) => {
+        s.classList.remove('active');
+        segments[i].classList.toggle('done', i < index);
+        fills[i].style.width = i < index ? '100%' : '0%';
+      });
+
+      currentScene = index;
+      elapsed = 0;
+      lastTick = performance.now();
+      void scenes[currentScene].offsetWidth;
+      scenes[currentScene].classList.add('active');
+    }
+
+    function tick(now) {
+      if (!isPaused) {
+        if (!lastTick) lastTick = now;
+        elapsed += now - lastTick;
+        const dur = Number(scenes[currentScene].dataset.duration) || 6500;
+        const pct = Math.min(100, (elapsed / dur) * 100);
+        fills[currentScene].style.width = pct + '%';
+
+        if (elapsed >= dur) {
+          showScene(currentScene + 1);
+        }
+      }
+      lastTick = now;
+      requestAnimationFrame(tick);
+    }
+
+    startBtn.addEventListener('click', () => {
+      startOverlay.classList.add('hidden');
+      startAudio();
+      showScene(0);
+      requestAnimationFrame(tick);
+    });
+
+    pauseBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      isPaused = !isPaused;
+      lastTick = performance.now();
+      pauseBtn.textContent = isPaused ? '▶ Play' : '❚❚ Pause';
+      if (usingMediaFile) {
+        isPaused ? bgAudio.pause() : bgAudio.play();
+      }
+    });
+
+    document.getElementById('tap-prev').addEventListener('click', () => {
+      isPaused = false;
+      pauseBtn.textContent = '❚❚ Pause';
+      showScene(currentScene - 1);
+    });
+
+    document.getElementById('tap-next').addEventListener('click', () => {
+      if (currentScene < scenes.length - 1) {
+        isPaused = false;
+        pauseBtn.textContent = '❚❚ Pause';
+        showScene(currentScene + 1);
+      }
+    });
+
+    replayBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      isPaused = false;
+      pauseBtn.textContent = '❚❚ Pause';
+      if (usingMediaFile) {
+        bgAudio.currentTime = 0;
+        bgAudio.play();
+      }
+      showScene(0);
+    });
+  </script>
+</body>
+</html>
