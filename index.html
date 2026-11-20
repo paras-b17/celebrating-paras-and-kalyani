@@ -150,12 +150,12 @@
     }
 
     /* =========================================================
-       SCULPTED MONOGRAM STYLING (NO RECTANGULAR BOX EDGES)
+       SCULPTED MONOGRAM STYLING (CLEAN GOLD HIGHLIGHT, NO GRAY HALO)
        ========================================================= */
     .monogram-sculpted {
       display: block;
       mix-blend-mode: multiply;
-      filter: brightness(1.08) contrast(1.38) saturate(1.35);
+      filter: brightness(1.16) contrast(1.42) saturate(1.45);
       -webkit-mask-image: radial-gradient(ellipse 46% 36% at 50% 50%, #000 58%, rgba(0, 0, 0, 0.65) 76%, transparent 96%);
       mask-image: radial-gradient(ellipse 46% 36% at 50% 50%, #000 58%, rgba(0, 0, 0, 0.65) 76%, transparent 96%);
       pointer-events: none;
@@ -188,7 +188,7 @@
     }
 
     /* =========================================================
-       OPENING COVER OVERLAY (NAMES ABOVE, TAP MONOGRAM BELOW)
+       OPENING COVER OVERLAY (CLEAR INTERACTIVE CTA + MONOGRAM)
        ========================================================= */
     .start-overlay {
       position: absolute;
@@ -265,10 +265,10 @@
       font-size: 3rem;
       color: #fff3d1;
       text-shadow: 0 2px 14px rgba(0, 0, 0, 0.85);
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
 
-    /* Clickable Monogram Crest Button */
+    /* Clickable Monogram Crest + Shimmer Pill Button Group */
     .monogram-entry-btn {
       position: relative;
       background: transparent;
@@ -278,26 +278,26 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      transition: transform 0.3s ease;
+      transition: transform 0.28s ease;
     }
 
     .monogram-entry-btn:hover {
-      transform: scale(1.04);
+      transform: scale(1.03);
     }
 
     .monogram-entry-btn:active {
-      transform: scale(0.98);
+      transform: scale(0.97);
     }
 
     /* Luminous Parchment Halo Behind Cover Monogram */
     .cover-crest-stage {
       position: relative;
       width: 274px;
-      height: 128px;
+      height: 126px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 12px;
+      margin-bottom: 18px;
     }
 
     .cover-crest-stage::before {
@@ -314,20 +314,57 @@
       50% { box-shadow: 0 0 44px rgba(255, 224, 130, 0.62), 0 0 0 10px rgba(255, 230, 153, 0); }
     }
 
-    .tap-crest-hint {
+    /* Unmistakable Royal Gold Interactive Pill Button with Light Sweep */
+    .open-invite-pill {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 12px 28px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #fce396 0%, #d4a334 52%, #9a6c12 100%);
+      border: 1.5px solid #fff3c4;
+      color: #29050e;
       font-family: 'Cinzel', serif;
-      font-size: 0.6rem;
-      font-weight: 600;
-      letter-spacing: 0.24em;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: var(--gold-bright);
-      opacity: 0.88;
-      animation: hintFade 2.8s ease-in-out infinite;
+      box-shadow:
+        0 0 0 4px rgba(212, 175, 55, 0.22),
+        0 12px 28px rgba(0, 0, 0, 0.78),
+        inset 0 1.5px 4px rgba(255, 255, 255, 0.85);
+      animation: pillPulse 2.4s ease-in-out infinite;
     }
 
-    @keyframes hintFade {
-      0%, 100% { opacity: 0.65; }
-      50% { opacity: 1; }
+    /* Moving Shimmer Glint Across Button */
+    .open-invite-pill::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -120%;
+      width: 60%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.75), transparent);
+      transform: skewX(-22deg);
+      animation: shimmerSweep 2.8s infinite;
+    }
+
+    @keyframes shimmerSweep {
+      0%, 45% { left: -120%; }
+      100% { left: 160%; }
+    }
+
+    @keyframes pillPulse {
+      0%, 100% { transform: translateY(0); box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.22), 0 12px 28px rgba(0, 0, 0, 0.78); }
+      50% { transform: translateY(-2px); box-shadow: 0 0 0 8px rgba(212, 175, 55, 0.34), 0 16px 34px rgba(0, 0, 0, 0.88); }
+    }
+
+    .pill-star {
+      font-size: 0.72rem;
+      opacity: 0.85;
     }
 
     .cover-poetic-footer {
@@ -515,13 +552,14 @@
       margin-top: 2px;
     }
 
+    /* Luminous Ivory-Pearl Medallion Highlight Behind Scene 1 Monogram */
     .bless-monogram-divider {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
-      margin: 2px 0;
-      gap: 8px;
+      margin: 6px 0;
+      gap: 10px;
     }
 
     .bless-monogram-divider::before,
@@ -529,11 +567,24 @@
       content: "";
       flex: 1;
       height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(156, 114, 28, 0.6), transparent);
+      background: linear-gradient(90deg, transparent, rgba(156, 114, 28, 0.65), transparent);
     }
 
-    .bless-monogram-divider img {
-      width: 175px;
+    .bless-monogram-pill {
+      position: relative;
+      width: 196px;
+      height: 76px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, #fffdf9 56%, rgba(255, 250, 240, 0.85) 82%, transparent 100%);
+      border: 1px solid rgba(212, 175, 55, 0.42);
+      box-shadow: 0 4px 18px rgba(156, 114, 28, 0.14), inset 0 0 12px rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .bless-monogram-pill img {
+      width: 168px;
       height: auto;
     }
 
@@ -760,11 +811,31 @@
     }
 
     /* =========================================================
-       SCENE 5: CLOSING FAMILY COMPLIMENTS + SCULPTED CREST
+       SCENE 5: CLOSING FAMILY COMPLIMENTS + LUMINOUS PEARL CREST
        ========================================================= */
     .closing-scene {
       background: radial-gradient(ellipse at center, #fffaf0 0%, #f3e2c3 70%, #dec092 100%);
       padding: 38px 28px;
+    }
+
+    /* Luminous Ivory-Pearl Halo Behind Closing Crest so Gold Lettering Pops */
+    .closing-crest-stage {
+      position: relative;
+      width: 262px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 8px;
+    }
+
+    .closing-crest-stage::before {
+      content: "";
+      position: absolute;
+      inset: 6px 12px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, #fffdf9 56%, rgba(255, 250, 240, 0.88) 82%, transparent 100%);
+      box-shadow: 0 6px 24px rgba(156, 114, 28, 0.16), inset 0 0 14px rgba(255, 255, 255, 0.95);
     }
 
     .closing-quote {
@@ -844,7 +915,7 @@
     <!-- Top Right Music & Pause Controls -->
     <div class="reel-controls">
       <button class="ctrl-pill" id="pause-btn">❚❚ Pause</button>
-      <button class="ctrl-pill" id="mute-btn">♪ Vaaroon</button>
+      <button class="ctrl-pill" id="mute-btn">♪ Sunehra</button>
     </div>
 
     <!-- Floating Rose Petals Layer -->
@@ -857,7 +928,7 @@
     </div>
 
     <!-- =========================================================
-         OPENING COVER: NAMES ABOVE, TAP THE MONOGRAM BELOW TO ENTER
+         OPENING COVER: MONOGRAM CREST + SHIMMERING OPEN BUTTON
          ========================================================= -->
     <div class="start-overlay" id="start-overlay">
       <div class="cover-top-group">
@@ -868,7 +939,7 @@
       <div class="cover-center-group">
         <div class="cover-couple-names">Paras &amp; Kalyani</div>
 
-        <button class="monogram-entry-btn" id="start-reel-btn" aria-label="Tap Monogram to Open Invitation">
+        <button class="monogram-entry-btn" id="start-reel-btn" aria-label="Open Wedding Invitation">
           <div class="cover-crest-stage">
             <div class="royal-crest-emblem">
               <svg viewBox="0 0 260 120" fill="none">
@@ -880,7 +951,12 @@
               <img class="monogram-sculpted" src="monogram.png" alt="Paras & Kalyani Monogram" />
             </div>
           </div>
-          <span class="tap-crest-hint">Tap Emblem to Enter</span>
+
+          <span class="open-invite-pill">
+            <span class="pill-star">✦</span>
+            <span>Open Invitation</span>
+            <span class="pill-star">✦</span>
+          </span>
         </button>
       </div>
 
@@ -891,7 +967,7 @@
     </div>
 
     <!-- =========================================================
-         SCENE 0: CARVED TEMPLE DOORS -> LORD KRISHNA (.png)
+         SCENE 0: CARVED TEMPLE DOORS -> LORD KRISHNA (.png) [6.2s]
          ========================================================= -->
     <section class="scene" data-duration="6200">
       <div class="krishna-sanctum">
@@ -910,7 +986,7 @@
     </section>
 
     <!-- =========================================================
-         SCENE 1: BLESSINGS OF LORD KRISHNA + NAMES ABOVE + HANDS BELOW
+         SCENE 1: BLESSINGS OF LORD KRISHNA + NAMES + HANDS [8.5s]
          ========================================================= -->
     <section class="scene united-blessings-scene" data-duration="8500">
       <div class="blessings-border"></div>
@@ -927,7 +1003,9 @@
         </div>
 
         <div class="bless-monogram-divider bless-line bless-3">
-          <img class="monogram-sculpted" src="monogram.png" alt="P & K Monogram" />
+          <div class="bless-monogram-pill">
+            <img class="monogram-sculpted" src="monogram.png" alt="P & K Monogram" />
+          </div>
         </div>
 
         <div class="bless-line bless-4">
@@ -944,7 +1022,7 @@
     </section>
 
     <!-- =========================================================
-         SCENE 2: SANGEET & ENGAGEMENT (WORKING MAPS BUTTON)
+         SCENE 2: SANGEET & ENGAGEMENT [7.0s]
          ========================================================= -->
     <section class="scene ceremony-scene" data-duration="7000">
       <img
@@ -956,7 +1034,7 @@
       <div class="luminous-ivory-veil"></div>
 
       <div class="ceremony-content">
-        <h2 class="ceremony-heading c-anim c-1">Sangeet &amp; Engagement</h2>
+        <h2 class="ceremony-heading c-anim c-1">Engagement &amp; Sangeet</h2>
 
         <div class="gold-line-ornament c-anim c-2"></div>
 
@@ -980,7 +1058,7 @@
     </section>
 
     <!-- =========================================================
-         SCENE 3: WEDDING CEREMONY (WORKING MAPS BUTTON + SPARKS)
+         SCENE 3: WEDDING CEREMONY + SPARKS [8.0s]
          ========================================================= -->
     <section class="scene ceremony-scene" data-duration="8000">
       <img
@@ -1020,7 +1098,7 @@
     </section>
 
     <!-- =========================================================
-         SCENE 4: GRAND RECEPTION (WORKING MAPS BUTTON)
+         SCENE 4: RECEPTION [7.0s]
          ========================================================= -->
     <section class="scene ceremony-scene" data-duration="7000">
       <img
@@ -1033,7 +1111,7 @@
 
       <div class="ceremony-content">
         <div class="ceremony-sanskrit c-anim c-1">॥ स्वागत समारंभ ॥</div>
-        <h2 class="ceremony-heading c-anim c-1">Grand Reception</h2>
+        <h2 class="ceremony-heading c-anim c-1">Reception</h2>
 
         <div class="gold-line-ornament c-anim c-2"></div>
 
@@ -1057,19 +1135,21 @@
     </section>
 
     <!-- =========================================================
-         SCENE 5: CLOSING FAMILY COMPLIMENTS + SCULPTED CREST
+         SCENE 5: CLOSING FAMILY COMPLIMENTS [6.5s]
          ========================================================= -->
     <section class="scene closing-scene" data-duration="6500">
       <div class="blessings-border"></div>
 
-      <div class="royal-crest-emblem bless-line bless-1">
-        <svg viewBox="0 0 260 120" fill="none">
-          <ellipse cx="130" cy="60" rx="116" ry="48" stroke="#b88928" stroke-width="1.1" stroke-opacity="0.75"/>
-          <ellipse cx="130" cy="60" rx="111" ry="43" stroke="#9c721c" stroke-width="0.7" stroke-dasharray="3 4" stroke-opacity="0.75"/>
-          <circle cx="130" cy="12" r="2.8" fill="#9c721c"/>
-          <circle cx="130" cy="108" r="2.8" fill="#9c721c"/>
-        </svg>
-        <img class="monogram-sculpted" src="monogram.png" alt="Paras & Kalyani Monogram" />
+      <div class="closing-crest-stage bless-line bless-1">
+        <div class="royal-crest-emblem">
+          <svg viewBox="0 0 260 120" fill="none">
+            <ellipse cx="130" cy="60" rx="116" ry="48" stroke="#b88928" stroke-width="1.1" stroke-opacity="0.75"/>
+            <ellipse cx="130" cy="60" rx="111" ry="43" stroke="#9c721c" stroke-width="0.7" stroke-dasharray="3 4" stroke-opacity="0.75"/>
+            <circle cx="130" cy="12" r="2.8" fill="#9c721c"/>
+            <circle cx="130" cy="108" r="2.8" fill="#9c721c"/>
+          </svg>
+          <img class="monogram-sculpted" src="monogram.png" alt="Paras & Kalyani Monogram" />
+        </div>
       </div>
 
       <p class="closing-quote bless-line bless-2">
@@ -1212,11 +1292,11 @@
       if (usingMediaFile) {
         bgAudio.muted = isMuted;
       }
-      muteBtn.textContent = isMuted ? '✕ Muted' : '♪ Vaaroon';
+      muteBtn.textContent = isMuted ? '✕ Muted' : '♪ Sunehra';
     });
 
     /* =========================================================
-       3. REEL TIMELINE SEQUENCER
+       3. REEL TIMELINE SEQUENCER (ORIGINAL 43.2s TIMING)
        ========================================================= */
     const scenes = Array.from(document.querySelectorAll('.scene'));
     const segments = Array.from(document.querySelectorAll('.progress-segment'));
